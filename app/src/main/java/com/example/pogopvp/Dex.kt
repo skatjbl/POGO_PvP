@@ -82,7 +82,7 @@ object Matchup {
 
     fun report(opp: Mon?, me: Mon?, lg: Int): String {
         val ln = listOf("슈퍼", "하이퍼", "마스터")[lg]
-        if (opp == null || me == null) return "[$ln리그] 화면에서 두 포켓몬 이름을 찾는 중…\n(이 창을 탭하면 리그 변경)"
+        if (opp == null || me == null) return "[${ln}리그] 화면에서 두 포켓몬 이름을 찾는 중…\n(이 창을 탭하면 리그 변경)"
         val a = best(attackTypes(opp, lg), me.types)
         val b = best(attackTypes(me, lg), opp.types)
         val v = when {
@@ -90,7 +90,7 @@ object Matchup {
             b.second - a.second > 0.01 -> "✔ 내가 타입상 유리"
             else -> "타입상 비슷"
         }
-        return "[$ln리그] (탭: 리그 변경)\n" +
+        return "[${ln}리그] (탭: 리그 변경)\n" +
             "상대 ${opp.name} ${ko(opp.types)}\n  기술 ${ko(attackTypes(opp, lg))}\n" +
             "나 ${me.name} ${ko(me.types)}\n  기술 ${ko(attackTypes(me, lg))}\n" +
             "상대→나 ×%.2f (${TYPE_KO[a.first]})\n나→상대 ×%.2f (${TYPE_KO[b.first]})\n$v".format(a.second, b.second)
